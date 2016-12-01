@@ -1,0 +1,62 @@
+/*system classes*/
+body {
+  font-family: 'Lato', sans-serif !important;
+}
+
+.corrections-wrapper {
+	display:none !important;
+}
+
+.content-wrapper {
+    text-align: center;
+    position: relative;
+}
+
+textarea {
+	border: 1px solid rgb(222, 222, 222);
+    width: 400px;
+    height: 300px;
+    margin: 0px;
+}
+
+span#down {
+    background: #4f5152;
+    width: 100px;
+    color: #fff;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    padding: 9px;
+    border-radius: 4px;
+    line-height: 1;
+    font-weight: 600;
+    cursor:pointer;
+    margin-bottom: 50px;
+}
+
+span#down:hover {
+	background:#2a2b2b;
+}
+
+.receiver div {
+    border: 1px solid #d4d4d4;
+    display: inline-block;
+    width: 30%;
+    vertical-align: top;
+    margin: 10px;
+    box-shadow: 0 0 5px #e4e4e4;
+}
+
+.receiver div ul {
+	padding:0;
+}
+
+.receiver div li {
+	text-align: left;
+	background:#eaeaea;
+	padding:10px;
+}
+
+.receiver div li:nth-child(2n+1) {
+	background:#f1f1f1;
+}
