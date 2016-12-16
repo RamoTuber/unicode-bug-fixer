@@ -15,30 +15,36 @@
 		<header>
 			<h1>EEL - Unicode Bug Fixer</h1>
 			<p class="hint">paste on the column with incorrect unicode in names from your excel sheet into the text area</p>
+			<small>MAKE USE OF THIS SYSTEM ONLY ON CHROME</small>
 		</header>
 
 		<div class="receiver">
-			<textarea></textarea>
-			<span id="down">Generate List</span>
+			<textarea autofocus="autofocus"></textarea>
 
-			<div>
+			<div class="action">
+				<span id="down">Generate List</span>
+				<button id="copy-button" data-clipboard-target="#names-list">copy to clipboard</button>
+			</div>
+
+			<div class="orig-list-wrapper">
 			  <h4>Generated List with unicode errors</h4>
 			  <ol class="orig-list"></ol>
 			</div>
 
 			<div class="corrections-wrapper">
 			  <h4>Corrected Names</h4>
-			  <ol class="corrections"></ol>
+			  <ul id="results"></ul>
+			  <ol id="correct-names" class="corrections"></ol>
 			</div>
 
-			<div class="corrections2-wrapper">
-			  <h4>Corrected Names</h4>
-			  <ol class="corrections2"></ol>
+			<div>
+			  <textarea class="test"></textarea>
 			</div>
 		</div>
 	</div>
 
 	<script type="text/javascript" src="scripts/jquery1.3.js"></script>
 	<script type="text/javascript" src="scripts/script.js"></script>
+
 </body>
 </html>

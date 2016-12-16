@@ -1,403 +1,81 @@
 
 function check(string, wrapper) {
-    var terms = ['Ã€', 'Ã', 'Ã‚', 'Ãƒ', 'Ã„', 'Ã…', 'Ã†', 'Ã‡', 'Ãˆ', 'Ã‰', 'ÃŠ', 'Ã‹', 'ÃŒ', 'ÃŽ', 'Ã‘', 'Ã’', 
-                  'Ã“', 'Ã”', 'Ã•', 'Ã–', 'Ã—', 'Ã˜', 'Ã™', 'Ãš', 'Ã›', 'Ãœ', 'Ãž', 'ÃŸ', 'Ã¡', 'Ã¢', 'Ã£', 'Ã¤', 'Ã¥', 
-                  'Ã¦', 'Ã§', 'Ã¨', 'Ã©', 'Ãª', 'Ã«', 'Ã¬', 'Ã®', 'Ã¯', 'Ã°', 'Ã±', 'Ã²', 'Ã³', 'Ã´', 'Ãµ', 'Ã¶', 'Ã·', 'Ã¸', 
-                  'Ã¹', 'Ãº', 'Ã»', 'Ã¼', 'Ã½', 'Ã¾', 'Ã¿'];
+    var terms = {'Ã€':'À', 'Ã':'Á', 'Ã‚':'Â', 'Ãƒ':'Ã','Ã„':'Ä', 'Ã…':'Å',
+      'Ã†':'Æ', 'Ã‡':'Ç', 'Ãˆ':'È', 'Ã‰':'É', 'ÃŠ':'Ê', 'Ã‹':'Ë',
+      'ÃŒ':'Ì', 'ÃŽ':'Î', 'Ã‘':'Ñ', 'Ã’':'Ò', 'Ã“':'Ó', 'Ã”':'Ô',
+      'Ã•':'Õ', 'Ã–':'Ö', 'Ã—':'×', 'Ã˜':'Ø', 'Ã™':'Ù', 'Ãš':'Ú',
+      'Ã›':'Û', 'Ãœ':'Ü', 'Ãž':'Þ', 'ÃŸ':'ß', 'Ã¡':'á', 'Ã¢':'â',
+      'Ã£':'ã', 'Ã¤':'ä', 'Ã¥':'å', 'Ã¦':'æ', 'Ã§':'ç','Ã¨':'è',
+      'Ã©':'é', 'Ãª':'ê', 'Ã«':'ë', 'Ã¬':'ì', 'Ã®':'î', 'Ã¯':'ï',
+      'Ã°':'ð', 'Ã±':'ñ', 'Ã²':'ò', 'Ã³':'ó', 'Ã´':'ô', 'Ãµ':'õ',
+      'Ã¶':'ö', 'Ã·':'÷', 'Ã¸':'ø', 'Ã¹':'ù', 'Ãº':'ú', 'Ã»':'û', 
+      'Ã¼':'ü', 'Ã½':'ý', 'Ã¾':'þ', 'Ã¿':'ÿ', 'Ð˜':'ð˜','Ð³':'ð³','Ð¾':'ð¾','Ñ€':'ñ€','Ñœ':'ñœ',
+      'Ðš':'ðš','Ð½':'ð½','Ñ':'ñ','Ð°':'ð°','Ñ‚':'ñ‚','Ð¸':'ð¸','Ñ…':'ñ…','ÑŒ':'ñœ','Ð’':'ð’',
+      'Ð»':'ð»','Ð´':'ð´','Ð¼':'ð¼','Ð²':'ð²','Ñ‡':'ñ‡','Ð·':'ð·','Ðµ':'ðµ','Ñƒ':'ñƒ','Ð¯':'ð¯',
+      'Ðž':'ðž','ÐŸ':'ðÿ','Ð¥':'ð¥','Ð':'ð','Ð¹':'ð¹','Ð±':'ð±','Ðº':'ðº','Ð•':'ð•','Ð¡':'ð¡',
+      'Ð™':'ð™','Ð¿':'ð¿','Ð®':'ð®','Ð§':'ð§','Ð£':'ð£','ÑŽ':'ñž','Ð¶':'ð¶','Ð“':'ð“','Ñ†':'ñ†',
+      'Ð—':'ð—','Ð¤':'ð¤','Ð›':'ð›','Ð¦':'ð¦','Ñ‹':'ñ‹','Ñˆ':'ñˆ','Ðœ':'ðœ','Ð–':'ð–','Ñ„':'ñ„',
+      'Ñ‰':'ñ‰','Ð¢':'ð¢','Ð”':'ð”','Ð¨':'ð¨','Ð«':'ð«','Ð©':'ð©', 'Ð‘':'ð‘', 'Ð ':'ð ', 'Ð':'ð', 'Ð­':'ð­', 'Ñ‘':'ñ‘'};
+    
     var match = false;
 
-    for(var i=0;i<terms.length && !match;i++) {
+    var rx = /(Ã€|Ã|Ã‚|Ãƒ|Ã„|Ã…|Ã†|Ã‡|Ãˆ|Ã‰|ÃŠ|Ã‹|ÃŒ|ÃŽ|Ã‘|Ã’|Ã“|Ã”|Ã•|Ã–|Ã—|Ã˜|Ã™|Ãš|Ã›|Ãœ|Ãž|ÃŸ|Ã¡|Ã¢|Ã£|Ã¤|Ã¥|Ã¦|Ã§|Ã¨|Ã©|Ãª|Ã«|Ã¬|Ã®|Ã¯|Ã°|Ã±|Ã²|Ã³|Ã´|Ãµ|Ã¶|Ã·|Ã¸|Ã¹|Ãº|Ã»|Ã¼|Ã½|Ã¾|Ã¿|Ð|Ð |Ð˜|Ð‘|Ð³|Ð¾|Ñ€|Ñœ|Ðš|Ð½|Ñ|Ð°|Ñ‚|Ð¸|Ñ…|ÑŒ|Ð’|Ð»|Ð´|Ð¼|Ð²|Ñ‡|Ð·|Ðµ|Ñƒ|Ð¯|Ðž|ÐŸ|Ð¥|Ð|Ð¹|Ð±|Ðº|Ð•|Ð¡|Ð™|Ð¿|Ð®|Ð§|Ð£|ÑŽ|Ð¶|Ð“|Ñ†|Ð—|Ð¤|Ð›|Ð¦|Ñ‹|Ñˆ|Ðœ|Ð–|Ñ„|Ñ‰|Ð¢|Ð”|Ð¨|Ð«|Ð©|Ð­|Ñ‘)/g;
+    
+    var terms2 = {'À':'À', 'Ã':'Á', 'Á‚':'Â', 'Áƒ':'Ã', 'Á„':'Ä', 'Á…':'Å',
+                'Á†':'Æ', 'Á‡':'Ç', 'Áˆ':'È', 'Á‰':'É', 'ÁŠ':'Ê', 'Á‹':'Ë','ÁŒ':'Ì', 'ÁŽ':'Î', 
+                'Á‘':'Ñ', 'Á’':'Ò', 'Á“':'Ó', 'Á”':'Ô','Á•':'Õ',  'Á–':'Ö', 'Á—':'×', 'Á˜':'Ø', 
+                'Á™':'Ù', 'Áš':'Ú','Á›':'Û', 'Áœ':'Ü', 'Áž':'Þ', 'ÁŸ':'ß', 'Á¡':'á', 'Á¢':'â',
+                'Á£':'ã', 'Á¤':'ä', 'Á¥':'å', 'Á¦':'æ', 'Á§':'ç', 'Á¨':'è','Á©':'é', 'Áª':'ê', 'Á«':'ë', 'Á¬':'ì', 'Á®':'î', 'Á¯':'ï',
+                'Á°':'ð', 'Á±':'ñ', 'Á²':'ò', 'Á³':'ó', 'Á´':'ô', 'Áµ':'õ','Á¶':'ö', 'Á·':'÷', 'Á¸':'ø', 'Á¹':'ù', 'Áº':'ú', 'Á»':'û', 
+                'Á¼':'ü', 'Á½':'ý', 'Á¾':'þ', 'Á¿':'ÿ','ð˜':'И','ð³':'г','ð¾':'о','ñ€':'р','ñœ':'ь','ðš':'К',
+                'ð½':'н','ñ':'с','ð°':'а','ñ‚':'т','ð¸':'и','ñ…':'х','ñœ':'ь','ð’':'В','ð»':'л','ð´':'д',
+                'ð¼':'м','ð²':'в','ñ‡':'ч','ð·':'з','ðµ':'е','ñƒ':'у','ð¯':'Я','ðž':'О','ðÿ':'П','ð¥':'Х',
+                'ð':'Н','ð¹':'й','ð±':'б','ðº':'к','ð•':'Е','ð¡':'С','ð™':'Й','ð¿':'п','ð®':'Ю','ð§':'Ч',
+                'ð£':'У','ñž':'ю','ð¶':'ж','ð“':'Г','ñ†':'ц','ð—':'З','ð¤':'Ф','ð›':'Л','ð¦':'Ц','ñ‹':'ы','ñˆ':'ш','ðœ':'М','ð–':'Ж','ñ„':'ф','ñ‰':'щ','ð¢':'Т','ð”':'Д','ð¨':'Ш','ð«':'Ы','ð©':'Щ', 'ð‘':'Б', 'ð ':'Р', 'ð':'А', 'ð­':'Э', 'ñ‘':'ё'};
 
-        if(string.indexOf(terms[i]) > -1) {
-            match = true;
-            var newString='';
-            wrapper.css("background", "#a1e4ff");
-            var matchString = string.substring(string.indexOf(terms[i]), (string.indexOf(terms[i])+terms[i].length));
-            
-            switch(matchString) {
-            	case 'Ã€':
-              	newString = string.replace(matchString, "À");
-                break;
-              case 'Ã':
-              	newString = string.replace(matchString, "Á");
-                break;
-              case 'Ã‚':
-                newString = string.replace(matchString, "Â");
-                break;
-              case 'Ãƒ':
-                newString = string.replace(matchString, "Ã");
-                break;
-              case 'Ã„':
-                newString = string.replace(matchString, "Ä");
-                break;
-              case 'Ã…':
-                newString = string.replace(matchString, "Å");
-                break;
-              case 'Ã†':
-                newString = string.replace(matchString, "Æ");
-                break;
-              case 'Ã‡':
-                newString = string.replace(matchString, "Ç");
-                break;
-              case 'Ãˆ':
-                newString = string.replace(matchString, "È");
-                break;
-              case 'Ã‰':
-                newString = string.replace(matchString, "É");
-                break;
-              case 'ÃŠ':
-                newString = string.replace(matchString, "Ê");
-                break;
-              case 'Ã‹':
-                newString = string.replace(matchString, "Ë");
-                break;
-              case 'ÃŒ':
-                newString = string.replace(matchString, "Ì");
-                break;
-              case 'ÃŽ':
-                newString = string.replace(matchString, "Î");
-                break;
-              case 'Ã‘':
-                newString = string.replace(matchString, "Ñ");
-                break;
-              case 'Ã’':
-                newString = string.replace(matchString, "Ò");
-                break;
-              case 'Ã“':
-                newString = string.replace(matchString, "Ó");
-                break;
-              case 'Ã”':
-                newString = string.replace(matchString, "Ô");
-                break;
-              case 'Ã•':
-                newString = string.replace(matchString, "Õ");
-                break;
-              case 'Ã–':
-                newString = string.replace(matchString, "Ö");
-                break;
-              case 'Ã—':
-                newString = string.replace(matchString, "×");
-                break;
-              case 'Ã˜':
-                newString = string.replace(matchString, "Ø");
-                break;
-              case 'Ã™':
-                newString = string.replace(matchString, "Ù");
-                break;
-              case 'Ãš':
-                newString = string.replace(matchString, "Ú");
-                break;
-              case 'Ã›':
-                newString = string.replace(matchString, "Û");
-                break;
-              case 'Ãœ':
-                newString = string.replace(matchString, "Ü");
-                break;
-              case 'Ãž':
-                newString = string.replace(matchString, "Þ");
-                break;
-              case 'ÃŸ':
-                newString = string.replace(matchString, "ß");
-                break;
-              case 'Ã¡':
-                newString = string.replace(matchString, "á");
-                break;
-              case 'Ã¢':
-                newString = string.replace(matchString, "â");
-                break;
-              case 'Ã£':
-                newString = string.replace(matchString, "ã");
-                break;
-              case 'Ã¤':
-                newString = string.replace(matchString, "ä");
-                break;
-              case 'Ã¥':
-                newString = string.replace(matchString, "å");
-                break;
-              case 'Ã¦':
-                newString = string.replace(matchString, "æ");
-                break;
-              case 'Ã§':
-                newString = string.replace(matchString, "ç");
-                break;
-              case 'Ã¨':
-                newString = string.replace(matchString, "è");
-                break;
-              case 'Ã©':
-                newString = string.replace(matchString, "é");
-                break;
-              case 'Ãª':
-                newString = string.replace(matchString, "ê");
-                break;
-              case 'Ã«':
-                newString = string.replace(matchString, "ë");
-                break;
-              case 'Ã¬':
-                newString = string.replace(matchString, "ì");
-                break;
-              case 'Ã®':
-                newString = string.replace(matchString, "î");
-                break;
-              case 'Ã¯':
-                newString = string.replace(matchString, "ï");
-                break;
-              case 'Ã°':
-                newString = string.replace(matchString, "ð");
-                break;
-              case 'Ã±':
-                newString = string.replace(matchString, "ñ");
-                break;
-              case 'Ã²':
-                newString = string.replace(matchString, "ò");
-                break;
-              case 'Ã³':
-                newString = string.replace(matchString, "ó");
-                break;
-              case 'Ã´':
-                newString = string.replace(matchString, "ô");
-                break;
-              case 'Ãµ':
-                newString = string.replace(matchString, "õ");
-                break;
-              case 'Ã¶':
-                newString = string.replace(matchString, "ö");
-                break;
-              case 'Ã·':
-                newString = string.replace(matchString, "÷");
-                break;
-              case 'Ã¸':
-                newString = string.replace(matchString, "ø");
-                break;
-              case 'Ã¹':
-                newString = string.replace(matchString, "ù");
-                break;
-              case 'Ãº':
-                newString = string.replace(matchString, "ú");
-                break;
-              case 'Ãº':
-                newString = string.replace(matchString, "ú");
-                break;
-              case 'Ã»':
-                newString = string.replace(matchString, "û");
-                break;
-              case 'Ã¼':
-                newString = string.replace(matchString, "ü");
-                break;
-              case 'Ã½':
-                newString = string.replace(matchString, "ý");
-                break;
-              case 'Ã¾':
-                newString = string.replace(matchString, "þ");
-                break;
-              case 'Ã¿':
-                newString = string.replace(matchString, "ÿ");
-                break;
-              default:
-                alert('no matches');
+    var ft = /(À|Ã|Á‚|Áƒ|Á„|Á…|Á†|Á‡|Áˆ|Á‰|ÁŠ|Á‹|ÁŒ|ÁŽ|Á‘|Á’|Á“|Á”|Á•|Á–|Á—|Á˜|Á™|Áš|Á›|Áœ|Áž|ÁŸ|Á¡|Á¢|Á£|Á¤|Á¥|Á¦|Á§|Á¨|Á©|Áª|Á«|Á¬|Á®|Á¯|Á°|Á±|Á²|Á³|Á´|Áµ|Á¶|Á·|Á¸|Á¹|Áº|Á»|Á¼|Á½|Á¾|Á¿|ð |ð˜|ð³|ð¾|ñ€|ñœ|ðš|ð½|ñ|ð°|ñ‚|ð¸|ñ…|ñœ|ð’|ð‘|ð»|ð´|ð¼|ð²|ñ‡|ð·|ðµ|ñƒ|ð¯|ðž|ðÿ|ð¥|ð|ð¹|ð±|ðº|ð•|ð¡|ð™|ð¿|ð®|ð§|ð£|ñž|ð¶|ð“|ñ†|ð—|ð¤|ð›|ð¦|ñ‹|ñˆ|ðœ|ð–|ñ„|ñ‰|ð¢|ð”|ð¨|ð«|ð©|ð|ð­|ñ‘)/g;
+
+    if (rx.test(string)) {
+
+            newString = string.replace(rx, function(x) { return terms[x] ? terms[x] : ""; });
+
+            if(ft.test(newString)) {
+              wrapper.addClass("converted")
+
+              newStr = newString.replace(ft, function(x) { return terms2[x] ? terms2[x] : ""; });
+              $(".corrections").append("<li>" + newStr + "<span class='index'></span></li>");
+
+              
+              // $('.index').each(function() {
+              //   $(this).text(wrapper.index()+1);
+              // });
+
+              wrapper.each(function(i) {
+                wrapper.text(newStr);
+              });
             }
+      }
 
-            $(".corrections").append("<li>" + newString + "</li>");
-        }
+    var sp = /[#!$%^&*\d()+~=`{}\[\];'?\/]/;
+
+    if(sp.test(string)) {
+      newStrg = " ";
+      wrapper.text(newStrg);
+      wrapper.css({
+        border: "2px dashed rgba(255, 0, 0, 0.8)"
+      });
     }
 }
 
-function check2(string) {
-    var terms = ['Ã€', 'Ã', 'Á‚', 'Áƒ', 'Á„', 'Á…', 'Á†', 'Á‡', 'Áˆ', 'Á‰', 'ÁŠ', 'Á‹', 'ÁŒ', 'ÁŽ', 'Á‘', 'Á’', 
-                  'Á“', 'Á”', 'Á•', 'Á–', 'Á—', 'Á˜', 'Á™', 'Áš', 'Á›', 'Áœ', 'Áž', 'ÁŸ', 'Á¡', 'Á¢', 'Á£', 'Á¤', 'Á¥', 
-                  'Á¦', 'Á§', 'Á¨', 'Á©', 'Áª', 'Á«', 'Á¬', 'Á®', 'Á¯', 'Á°', 'Á±', 'Á²', 'Á³', 'Á´', 'Áµ', 'Á¶', 'Á·', 'Á¸', 
-                  'Á¹', 'Áº', 'Á»', 'Á¼', 'Á½', 'Á¾', 'Á¿'];
-    var match = false;
-
-    for(var i=0;i<terms.length && !match;i++) {
-
-        if(string.indexOf(terms[i]) > -1) {
-            match = true;
-            var newString='';
-            var matchString = string.substring(string.indexOf(terms[i]), (string.indexOf(terms[i])+terms[i].length));
-            
-            switch(matchString) {
-              case 'Ã€':
-                newString = string.replace(matchString, "À");
-                break;
-              case 'Ã':
-                newString = string.replace(matchString, "Á");
-                break;
-              case 'Á‚':
-                newString = string.replace(matchString, "Â");
-                break;
-              case 'Áƒ':
-                newString = string.replace(matchString, "Ã");
-                break;
-              case 'Á„':
-                newString = string.replace(matchString, "Ä");
-                break;
-              case 'Á…':
-                newString = string.replace(matchString, "Å");
-                break;
-              case 'Á†':
-                newString = string.replace(matchString, "Æ");
-                break;
-              case 'Á‡':
-                newString = string.replace(matchString, "Ç");
-                break;
-              case 'Áˆ':
-                newString = string.replace(matchString, "È");
-                break;
-              case 'Á‰':
-                newString = string.replace(matchString, "É");
-                break;
-              case 'ÁŠ':
-                newString = string.replace(matchString, "Ê");
-                break;
-              case 'Á‹':
-                newString = string.replace(matchString, "Ë");
-                break;
-              case 'ÁŒ':
-                newString = string.replace(matchString, "Ì");
-                break;
-              case 'ÁŽ':
-                newString = string.replace(matchString, "Î");
-                break;
-              case 'Á‘':
-                newString = string.replace(matchString, "Ñ");
-                break;
-              case 'Á’':
-                newString = string.replace(matchString, "Ò");
-                break;
-              case 'Á“':
-                newString = string.replace(matchString, "Ó");
-                break;
-              case 'Á”':
-                newString = string.replace(matchString, "Ô");
-                break;
-              case 'Á•':
-                newString = string.replace(matchString, "Õ");
-                break;
-              case 'Á–':
-                newString = string.replace(matchString, "Ö");
-                break;
-              case 'Á—':
-                newString = string.replace(matchString, "×");
-                break;
-              case 'Á˜':
-                newString = string.replace(matchString, "Ø");
-                break;
-              case 'Á™':
-                newString = string.replace(matchString, "Ù");
-                break;
-              case 'Áš':
-                newString = string.replace(matchString, "Ú");
-                break;
-              case 'Á›':
-                newString = string.replace(matchString, "Û");
-                break;
-              case 'Áœ':
-                newString = string.replace(matchString, "Ü");
-                break;
-              case 'Áž':
-                newString = string.replace(matchString, "Þ");
-                break;
-              case 'ÁŸ':
-                newString = string.replace(matchString, "ß");
-                break;
-              case 'Á¡':
-                newString = string.replace(matchString, "á");
-                break;
-              case 'Á¢':
-                newString = string.replace(matchString, "â");
-                break;
-              case 'Á£':
-                newString = string.replace(matchString, "ã");
-                break;
-              case 'Á¤':
-                newString = string.replace(matchString, "ä");
-                break;
-              case 'Á¥':
-                newString = string.replace(matchString, "å");
-                break;
-              case 'Á¦':
-                newString = string.replace(matchString, "æ");
-                break;
-              case 'Á§':
-                newString = string.replace(matchString, "ç");
-                break;
-              case 'Á¨':
-                newString = string.replace(matchString, "è");
-                break;
-              case 'Á©':
-                newString = string.replace(matchString, "é");
-                break;
-              case 'Áª':
-                newString = string.replace(matchString, "ê");
-                break;
-              case 'Á«':
-                newString = string.replace(matchString, "ë");
-                break;
-              case 'Á¬':
-                newString = string.replace(matchString, "ì");
-                break;
-              case 'Á®':
-                newString = string.replace(matchString, "î");
-                break;
-              case 'Á¯':
-                newString = string.replace(matchString, "ï");
-                break;
-              case 'Á°':
-                newString = string.replace(matchString, "ð");
-                break;
-              case 'Á±':
-                newString = string.replace(matchString, "ñ");
-                break;
-              case 'Á²':
-                newString = string.replace(matchString, "ò");
-                break;
-              case 'Á³':
-                newString = string.replace(matchString, "ó");
-                break;
-              case 'Á´':
-                newString = string.replace(matchString, "ô");
-                break;
-              case 'Áµ':
-                newString = string.replace(matchString, "õ");
-                break;
-              case 'Á¶':
-                newString = string.replace(matchString, "ö");
-                break;
-              case 'Á·':
-                newString = string.replace(matchString, "÷");
-                break;
-              case 'Á¸':
-                newString = string.replace(matchString, "ø");
-                break;
-              case 'Á¹':
-                newString = string.replace(matchString, "ù");
-                break;
-              case 'Áº':
-                newString = string.replace(matchString, "ú");
-                break;
-              case 'Á»':
-                newString = string.replace(matchString, "û");
-                break;
-              case 'Á¼':
-                newString = string.replace(matchString, "ü");
-                break;
-              case 'Á½':
-                newString = string.replace(matchString, "ý");
-                break;
-              case 'Á¾':
-                newString = string.replace(matchString, "þ");
-                break;
-              case 'Á¿':
-                newString = string.replace(matchString, "ÿ");
-                break;
-              default:
-                alert('no matches');
-            }
-
-            $(".corrections2").append("<li>" + newString + "</li>");
-        }
-    }
+function copy() {
+  $('.orig-list li').each(function() {
+    var content = $(this).text().toLowerCase().replace(/\b[a-z]/g, function(letter) {
+            return letter.toUpperCase();
+        }); ;
+    $(".test").append("\n" + content);
+  });
 }
+
 
 $(document).ready(function() {
 
@@ -413,9 +91,20 @@ $(document).ready(function() {
         check(phrase, matchHighlight);  
     });
 
-    $('.corrections li').each(function() {
-        var phrase = $(this).text();    
-        check2(phrase);  
+    $('button').css("display", "inline-block");
+
+    var mappedItems = $('.orig-list li').map(function( index ) {
+      if($(this).hasClass('converted')) 
+        var replacement = $( "<li>" ).text( $( this ).index()+1).get( 0 );
+        return replacement;
     });
+
+    $( "#results" ).append( mappedItems );
   });
+
+  $("#copy-button").click(function() {
+
+    copy();
+  });
+
 });

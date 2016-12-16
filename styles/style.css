@@ -3,13 +3,41 @@ body {
   font-family: 'Lato', sans-serif !important;
 }
 
-.corrections-wrapper {
-	display:none !important;
+body {
+    user-select:none;
+}
+
+small {
+    color: #b74545;
+}
+
+ol#correct-names{
+    user-select:auto !important;
+}
+
+.orig-list-wrapper {
+	//display:none !important;
+}
+
+.red {
+    color:red;
+}
+
+.green {
+    color: green;
 }
 
 .content-wrapper {
     text-align: center;
     position: relative;
+}
+
+li {
+    text-transform: lowercase;
+}
+
+li:first-letter {
+    text-transform: capitalize;
 }
 
 textarea {
@@ -19,11 +47,11 @@ textarea {
     margin: 0px;
 }
 
-span#down {
+span#down, button {
     background: #4f5152;
-    width: 100px;
+    width: auto;
     color: #fff;
-    display: block;
+    display: inline-block;
     margin: auto;
     margin-top: 20px;
     padding: 9px;
@@ -31,17 +59,25 @@ span#down {
     line-height: 1;
     font-weight: 600;
     cursor:pointer;
-    margin-bottom: 50px;
 }
 
 span#down:hover {
 	background:#2a2b2b;
 }
 
+button {
+    background: transparent;
+    border: 1px solid #4f5152;
+    color: #4f5152;
+    width: 137px;
+    vertical-align: bottom;
+    display: none;
+}
+
 .receiver div {
     border: 1px solid #d4d4d4;
     display: inline-block;
-    width: 30%;
+    width: 25%;
     vertical-align: top;
     margin: 10px;
     box-shadow: 0 0 5px #e4e4e4;
@@ -59,4 +95,65 @@ span#down:hover {
 
 .receiver div li:nth-child(2n+1) {
 	background:#f1f1f1;
+}
+
+.action {
+    width: 100% !important;
+    display: block !important;
+    border:none !important;
+    margin:0 !important;
+    padding-bottom: 20px;
+}
+
+/*corrected names list*/
+.corrections-wrapper {
+    position: relative;
+}
+#results {
+    display: block;
+    list-style: none;
+    width: 45px;
+    font-size: 12px;
+    font-weight: 700;
+    position: absolute;
+    z-index: 1004;
+    right: 8px;
+    top: 55px;
+}
+
+#results li {
+    padding: 2px 8px;
+    margin-bottom: 12px;
+    height: 22px;
+    font-size: 12px;
+    border-radius: 2px;
+    border: 1px solid #a1e4ff;
+    background: white;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.corrections li {
+    position: relative;
+}
+
+.corrections li span {
+    position: absolute;
+    display: block;
+    width: auto;
+    padding: 0 8px;
+    height: 22px;
+    top: 9px;
+    font-size: 12px;
+    border-radius: 2px;
+    right: 9px;
+    border: 1px solid #a1e4ff;
+    background: white;
+    line-height: 1.8;
+}
+
+
+/*js injected classes*/
+.converted {
+    background: #a1e4ff !important;
 }
